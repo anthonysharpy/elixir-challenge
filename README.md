@@ -72,9 +72,9 @@ When looking at differences in the JSON, we ignore any changes in the values. If
 
 ## How It Works
 
-Each input file contains a list of "pairs" (i.e. a request and a response).
+Each input file contains a list of "pairs" (a pair is a request plus a response).
 
-The first difficult part is finding a way to match pairs across files. I didn't assume that all the pairs were going to be in the same order in both files, or that the number of requests were going to be the same. 
+First the program has to match pairs across files. I didn't assume that all the pairs were going to be in the same order in both files, or that the number of requests were going to be the same. 
 
 The program matches the pairs from the two files based on the request method plus the URL (excluding parameters, since these commonly change). 
 
