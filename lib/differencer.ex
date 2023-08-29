@@ -32,13 +32,13 @@ defmodule Differencer do
 
           file_1_index = Enum.find_index(file_1_pairs, fn pair ->
             url == Parser.get_url_for_pair(pair)
-          end)
+          end) || 0
           file_2_index = Enum.find_index(file_2_pairs, fn pair ->
             url == Parser.get_url_for_pair(pair)
-          end)
+          end) || 0
 
           if file_1_index != file_2_index do
-            IO.puts "Notice - the order of request #{url} has changed from #{file_1_index} to #{file_2_index}"
+            IO.puts "Notice - the order of request #{url} has changed from #{file_1_index+1} to #{file_2_index+1}"
           end
       end
     end)
@@ -153,11 +153,11 @@ defmodule Differencer do
             {_h1, nil} -> nil # They didn't change order if they only exist in one file.
             {nil, _h2} -> nil
             {h1, h2} ->
-              h1_index = Enum.find_index(pair_1_request_headers, fn x -> x["name"] == h1["name"] end) + 1
-              h2_index = Enum.find_index(pair_2_request_headers, fn x -> x["name"] == h2["name"] end) + 1
+              h1_index = Enum.find_index(pair_1_request_headers, fn x -> x["name"] == h1["name"] end) || 0
+              h2_index = Enum.find_index(pair_2_request_headers, fn x -> x["name"] == h2["name"] end) || 0
 
               if h1_index != h2_index do
-                IO.puts "Notice - request header #{h1["name"]} moved from position #{h1_index} to #{h2_index} in request #{url}"
+                IO.puts "Notice - request header #{h1["name"]} moved from position #{h1_index+1} to #{h2_index+1} in request #{url}"
               end
           end
         end)

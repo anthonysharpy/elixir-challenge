@@ -43,8 +43,8 @@ defmodule DifferencerTest do
           }
         ],
         [
-          "Notice - the order of request GET www.test.com has changed from 0 to 1",
-          "Notice - the order of request GET www.test.com/somethingelse has changed from 1 to 0"
+          "Notice - the order of request GET www.test.com has changed from 1 to 2",
+          "Notice - the order of request GET www.test.com/somethingelse has changed from 2 to 1"
         ]
       },
 
@@ -84,8 +84,8 @@ defmodule DifferencerTest do
           }
         ],
         [
-          "Notice - the order of request GET www.test.com has changed from 1 to 0",
-          "Notice - the order of request GET www.test.com/somethingelse has changed from 0 to 1"
+          "Notice - the order of request GET www.test.com has changed from 2 to 1",
+          "Notice - the order of request GET www.test.com/somethingelse has changed from 1 to 2"
         ]
       },
 
