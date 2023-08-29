@@ -78,7 +78,7 @@ First the program has to match pairs across files. I didn't assume that all the 
 
 The program matches the pairs from the two files based on the request method plus the URL (excluding parameters, since these commonly change). 
 
-This is not a perfect solution since even URLs can change (in the example data we see ".../A3254414/..." change to ".../A3254415/..."). I could have written an algorithm to compare the similarity of the URLs, but this would have been error-prone. For example, these obviously correspond to eachother:
+This is not a perfect solution since even URLs can change (in the example data we see ".../A3254414/..." change to ".../A3254415/..."). We could have an algorithm that compares the similarity of the URLs, but this would be error-prone. For example, these obviously correspond to eachother:
 
 https://mybank.com/api/4255/getbalance 
 https://mybank.com/api/4260/getbalance
@@ -87,9 +87,9 @@ But do these?
 https://mybank.com/api/account/configure 
 https://mybank.com/api/app/configure
 
-What it does then is where it can't find a URL that matches between both files (e.g. because it was renamed), it asks the user to choose the URL they think matches (or none, if it was added or removed in one of the files). This is basically exactly the way things like like Git manage merge conflicts.
+What it does then is where it can't find a URL match between both files (e.g. because it was renamed), it asks the user to choose the URL they think matches (if any). This is more or less the same way things like like Git manage merge conflicts.
 
-It may be the case that this tool would be used for automated testing, in which case human input is not practical. So I added a flag that disables input and causes the program to always assume that an unmatched URL is a new/removed request.
+This tool could be used for automated testing, in which case human input is not practical. So I added a flag that disables input and causes the program to always assume that an unmatched URL is a new/removed request.
 
 Once we have matched the pairs, the program does a check to warn if there are duplicate requests on the same URL (the matching procedure assumes this is not possible). It **is** possible that there might be duplicate requests in the real world (e.g. some APIs might make all of their requests on the same URL), but the reasons I decided not to try and handle this were:
 
