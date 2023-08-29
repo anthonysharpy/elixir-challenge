@@ -22,9 +22,9 @@ mix run -e HTTPComparer.Application.main -- ./test/test_files/13.3.7.json ./test
 ======================================
 Critical - URLs have changed between files: GET https://thebank.teller.engineering/api/apps/A3254414/configuration vs GET https://thebank.teller.engineering/api/apps/A3254415/configuration
 Warning - file 2 made a request to POST https://thebank.teller.engineering/api/sectrace/verify but file 1 did not
-Notice - the order of request GET https://status.thebank.teller.engineering/status.json has changed from 0 to 1
-Notice - the order of request GET https://thebank.teller.engineering/api/apps/A3254414/configuration has changed from 1 to
-Notice - the order of request POST https://thebank.teller.engineering/api/accesstokens/usernameandpassword has changed from 2 to 3
+Notice - the order of request GET https://status.thebank.teller.engineering/status.json has changed from 1 to 2
+Notice - the order of request GET https://thebank.teller.engineering/api/apps/A3254414/configuration has changed from 2 to 1
+Notice - the order of request POST https://thebank.teller.engineering/api/accesstokens/usernameandpassword has changed from 3 to 4
 ======================================
                Headers
 ======================================
