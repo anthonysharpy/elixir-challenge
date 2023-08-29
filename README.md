@@ -16,6 +16,7 @@ mix run -e HTTPComparer.Application.main -- ./test/test_files/13.3.7.json ./test
 
 ## Example Output
 
+```
 ======================================
                Requests
 ======================================
@@ -47,6 +48,7 @@ Info - request GET https://thebank.teller.engineering/api/apps/A3254414/configur
 Info - request GET https://thebank.teller.engineering/api/apps/A3254414/configuration in file 2 returned key properties.aiEnablement in the response body, but in file 1 it didn't
 Info - request GET https://thebank.teller.engineering/api/apps/A3254414/configuration in file 2 returned key properties.paymentsEnablement in the response body, but in file 1 it didn't
 ======================================
+```
 
 ## Project Setup
 
