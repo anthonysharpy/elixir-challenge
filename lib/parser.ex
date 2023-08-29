@@ -59,8 +59,8 @@ defmodule Parser do
   Returns a list of all keys. For example, it might return:
 
   [user.name,
-  user.contactInformation.Email,
-  user.contactInformation.Phone]
+  user.contactInformation.email,
+  user.contactInformation.phone]
   """
   def get_keys_from_map(map) do
     case is_map(map) do
