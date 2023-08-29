@@ -97,21 +97,21 @@ This tool could be used for automated testing, in which case human input is not 
 
 Once we have matched the pairs, the program does a check to warn if there are duplicate requests on the same URL (the matching procedure assumes this is not possible). It **is** possible that there might be duplicate requests in the real world (e.g. some APIs might make all of their requests on the same URL), but the reasons I decided not to try and handle this were:
 
-a) the solution for APIs that make different requests on the same URL would probably be API-specific and so it is a bit of an unnecessary rabbit hole to go down
-b) it's maybe a bit beyond the scope of this hypothetical example since that doesn't happen in the examples given
-c) the program will probably still be producing somewhat useful output anyway
-d) we could always add that on later, this is probably fine for 95% of use cases
+1. the solution for APIs that make different requests on the same URL would probably be API-specific and so it is a bit of an unnecessary rabbit hole to go down
+2. it's maybe a bit beyond the scope of this hypothetical example since that doesn't happen in the examples given
+3. the program will probably still be producing somewhat useful output anyway
+4. we could always add that on later, this is probably fine for 95% of use cases
 
 The program runs the matched pairs through a number of separate procedures to identify any differences. 
 
 Each procedure looks for a specific thing and is targeted to maximise the usefulness to the developer in terms of its output. Output is demarcated into separate request/header/response sections. Output comes in different types:
 
-Critical: there is a significant difference or parsing issue that warrants immediate attention from a developer (e.g. a removed endpoint).
-Warning: something has changed that may or may not be important (e.g. new headers).
-Notice: something has changed but it is unlikely to be important (e.g. changed header order).
-Info: something has changed but there's no way it could affect anything (e.g. new response body keys), this is just for informational purposes.
+* Critical: there is a significant difference or parsing issue that warrants immediate attention from a developer (e.g. a removed endpoint).
+* Warning: something has changed that may or may not be important (e.g. new headers).
+* Notice: something has changed but it is unlikely to be important (e.g. changed header order).
+* Info: something has changed but there's no way it could affect anything (e.g. new response body keys), this is just for informational purposes.
 
-It is difficult to knwo how useful this program would be or what practical limitations it might come up against when used in the real world. As with most software it would probably need further iteration as and when problems arise.
+It is difficult to know how useful this program would be or what practical limitations it might come up against when used in the real world. As with most software it would probably need further iteration as and when problems arise.
 
 ## Error Handling
 
