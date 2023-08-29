@@ -52,11 +52,11 @@ Info - request GET https://thebank.teller.engineering/api/apps/A3254414/configur
 
 ## Project Setup
 
-I used Mix since it seemed like a good way to manage a non-trivial project.
+I used Mix since it seemed like a good way to manage a project.
 
 ## Approach To Problem
 
-At its core the problem involves comparing two JSON files. One approach would just be to find and print out the differences. However, when considered in the context that the tool would be used, this wouldn't be very helpful. The tool needs to inform a developer, in the simplest and most time-efficient way possible, whether there are any changes that they need to care about. Generating a big sprawling diff would make it very difficult for a developer to read (especially if the files have large differences or are out-of-order), and if a developer has to struggle to understand it then they risk missing something important.
+At its core the problem involves comparing two JSON files. One approach would just be to find and print out the differences. However, when considered in the context that the tool would be used, this wouldn't be very helpful. The tool needs to inform a developer, in the simplest and most time-efficient way possible, whether there are any changes that they need to care about. Generating a big sprawling diff would make it very difficult for a developer to read, and if a developer has to struggle to understand it then they risk missing something important.
 
 In figuring out the best solution I made a couple of assumptions:
 
@@ -66,9 +66,9 @@ In figuring out the best solution I made a couple of assumptions:
 - There is at most one response for every request, since that's generally how the HTTP protocol works.
 - Any given request is made only once - i.e. the same request method with the same URL does not come up twice in the same file (although, see below).
 
-Another assumption I made is that the program should mostly only care about comparing requests, not responses. This is because the content of a response is mostly immaterial (we just care that we get one, not what it says). It is true that data from a response might be used in a subsequent request, but this is aaccounted for just by looking at the captured requests. That being said, we do still output any changed response body keys for informational purposes, since it might be helpful for a developer to know, if a code change is required. 
+Another assumption I made is that the program should mostly only care about comparing requests, not responses. This is because the content of a response is mostly immaterial (we just care that we get one, not what it says). It is true that data from a response might be used in a subsequent request, but this is accounted for just by looking at the captured requests. That being said, we do still output any changed response body keys for informational purposes, since it might be helpful for a developer to know, if a code change is required. 
 
-When looking at differences in the JSON, we ignore any changes in the values. If something like a dynamically-generated access token changes between the two files, that's not something we need to be worrying about. It is possible there might be important changes in the values, but there is no surefire way we can distinguish between important and unimportant changes, and it would just lead to too many false positives.
+When looking at differences in the JSON, we ignore any changes in the values. If something like a dynamically-generated access token changes between the two files, that's not something we need to be worrying about. It is possible there might be important changes in the values, but there is no surefire way we can distinguish between important and unimportant changes, and it would just lead to too many false positives. I suppose it might be helpful to output any value changes for informational purposes only, but for now let's just put that under the category of "we can add it later if we need it".
 
 ## How It Works
 
@@ -113,7 +113,7 @@ It is difficult to knwo how useful this program would be or what practical limit
 
 As this is not a production-critical application, I didn't see the need for careful error handling; if there is an error then a hopefully helpful exception is raised, and the program is allowed to crash.
 
-# Test
+# Tests
 
 To run the tests:
 
