@@ -80,12 +80,16 @@ The program matches the pairs from the two files based on the request method plu
 
 This is not a perfect solution since even URLs can change (in the example data we see ".../A3254414/..." change to ".../A3254415/..."). We could have an algorithm that compares the similarity of the URLs, but this would be error-prone. For example, these obviously correspond to eachother:
 
+```
 https://mybank.com/api/4255/getbalance 
 https://mybank.com/api/4260/getbalance
+```
 
 But do these?
+```
 https://mybank.com/api/account/configure 
 https://mybank.com/api/app/configure
+```
 
 What it does then is where it can't find a URL match between both files (e.g. because it was renamed), it asks the user to choose the URL they think matches (if any). This is more or less the same way things like like Git manage merge conflicts.
 
