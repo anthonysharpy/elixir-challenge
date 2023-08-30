@@ -131,14 +131,12 @@ defmodule DifferencerTest do
     ]
 
     Enum.each(test_table, fn {matched_pairs, file_1_pairs, file_2_pairs, expected_output} ->
-      output = capture_io(fn ->
-        Differencer.check_request_order(matched_pairs, file_1_pairs, file_2_pairs)
-      end)
+      output = Differencer.check_request_order(matched_pairs, file_1_pairs, file_2_pairs)
 
       Enum.each(expected_output, fn eo ->
         case eo do
-          nil -> refute String.contains?(output, "the order of request")
-          _any -> assert String.contains?(output, eo)
+          nil -> refute Enum.any?(output, fn x -> String.contains?(x, "the order of request") end)
+          _any -> assert Enum.any?(output, fn x -> String.contains?(x, eo) end)
         end
       end)
     end)
@@ -190,13 +188,11 @@ defmodule DifferencerTest do
     ]
 
     Enum.each(test_table, fn {data, expected_output} ->
-      output = capture_io(fn ->
-        Differencer.find_nonmatching_matches(data)
-      end)
+      output = Differencer.find_nonmatching_matches(data)
 
       case expected_output do
-        nil -> refute String.contains?(output, "URLs have changed between files")
-        _any -> assert String.contains?(output, expected_output)
+        nil -> refute Enum.any?(output, fn x -> String.contains?(x, "URLs have changed between files") end)
+        _any -> assert Enum.any?(output, fn x -> String.contains?(x, expected_output) end)
       end
     end)
   end
@@ -265,14 +261,12 @@ defmodule DifferencerTest do
     ]
 
     Enum.each(test_table, fn {data, expected_output} ->
-      output = capture_io(fn ->
-        Differencer.check_response_body_keys(data)
-      end)
+      output = Differencer.check_response_body_keys(data)
 
       Enum.each(expected_output, fn eo ->
         case eo do
-          nil -> refute String.contains?(output, "in the response body")
-          _any -> assert String.contains?(output, eo)
+          nil -> refute Enum.any?(output, fn x -> String.contains?(x, "in the response body") end)
+          _any -> assert Enum.any?(output, fn x -> String.contains?(x, eo) end)
         end
       end)
     end)
@@ -407,14 +401,16 @@ defmodule DifferencerTest do
     ]
 
     Enum.each(test_table, fn {data, expected_output} ->
-      output = capture_io(fn ->
-        Differencer.check_request_headers(data)
-      end)
+      output = Differencer.check_request_headers(data)
 
       Enum.each(expected_output, fn eo ->
         case eo do
-          nil -> refute String.contains?(output, "in the response body") || String.contains?(output, "moved from position")
-          _any -> assert String.contains?(output, eo)
+          nil ->
+            refute Enum.any?(output, fn x ->
+              String.contains?(x, "in the response body") || String.contains?(x, "moved from position")
+            end)
+          _any ->
+            assert Enum.any?(output, fn x -> String.contains?(x, eo) end)
         end
       end)
     end)
@@ -461,14 +457,12 @@ defmodule DifferencerTest do
     ]
 
     Enum.each(test_table, fn {data, expected_output} ->
-      output = capture_io(fn ->
-        Differencer.find_failed_matches(data)
-      end)
+      output = Differencer.find_failed_matches(data)
 
       Enum.each(expected_output, fn eo ->
         case eo do
-          nil -> refute String.contains?(output, "Warning - file 1 made a request to")
-          _any -> assert String.contains?(output, eo)
+          nil -> refute Enum.any?(output, fn x -> String.contains?(x, "Warning - file 1 made a request to") end)
+          _any -> assert Enum.any?(output, fn x -> String.contains?(x, eo) end)
         end
       end)
     end)
